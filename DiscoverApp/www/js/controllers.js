@@ -73,12 +73,20 @@ angular.module('starter.controllers', ['ngOpenFB'])
     })
 =======
 	$scope.fbLogin = function () {
+<<<<<<< HEAD
 		ngFB.login({scope: 'email,user_likes'}).then(//,read_stream,publish_actions
 			function (response) {
 				if (response.status === 'connected') {
 					console.log('Facebook login succeeded');
 					// console.log(ngFB.login.email); 
 					//$scope.closeLogin();
+=======
+		ngFB.login({scope: 'user_likes'}).then(//email,,read_stream,publish_actions
+			function (response) {
+				if (response.status === 'connected') {
+					console.log('Facebook login succeeded');
+					$scope.closeLogin();
+>>>>>>> parent of ad0b0ea... cotton candy can cut cats
 				} else {
 					alert('Facebook login failed');
 				}
@@ -128,7 +136,11 @@ angular.module('starter.controllers', ['ngOpenFB'])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-
+.controller('ButtonColorChanger', function($scope, $stateParams){
+	$scope.broadcastState=!$scope.broadcastState;
+	
+	console.log($scope.broadcastState);
+})
 
 .controller('HomeController', function($scope, $window) {
 	$window.navigator.geolocation.getCurrentPosition(function(position){
