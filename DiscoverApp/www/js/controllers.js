@@ -21,6 +21,13 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 	$scope.likes = UserLikes;
 
+	$scope.countMembers = function(likesObj) {
+		return Object.keys(likesObj).length; 
+	}
+
+	console.log($scope.likes); 
+	console.log(UserLikes); 
+
 })
 
 // This is

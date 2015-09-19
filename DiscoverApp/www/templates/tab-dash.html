@@ -5,7 +5,7 @@
 
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="like in likes" type="item-text-wrap" >
         <!-- <img ng-src="{{chat.face}}"> -->
-        <h2>{{like.id}} - (num)</h2>
+        <h2>{{like.id}} ({{countMembers(like.users)}})</h2>
         <!-- <p>{{like.lastText}}</p> -->
         <i class="icon ion-chevron-right icon-accessory"></i>
         
