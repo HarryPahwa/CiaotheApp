@@ -47,4 +47,14 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+
+.factory("UserLikes", function($firebaseArray) {
+  var userlikesref = new Firebase("https://blinding-inferno-6264.firebaseio.com/user_likes");
+  return $firebaseArray(userlikesref);
+})
+
+.factory("Users", function($firebaseArray) {
+  var userref = new Firebase("https://blinding-inferno-6264.firebaseio.com/Users");
+  return $firebaseArray(userref);
 });

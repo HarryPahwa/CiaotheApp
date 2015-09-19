@@ -1,6 +1,7 @@
 angular.module('starter.controllers', ['ngOpenFB'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB) {
+<<<<<<< HEAD
     watchLoginChange = function() {
 
       var _self = this;
@@ -70,10 +71,31 @@ angular.module('starter.controllers', ['ngOpenFB'])
     		
     	};
     })
+=======
+	$scope.fbLogin = function () {
+		ngFB.login({scope: 'email,user_likes'}).then(//,read_stream,publish_actions
+			function (response) {
+				if (response.status === 'connected') {
+					console.log('Facebook login succeeded');
+					// console.log(ngFB.login.email); 
+					//$scope.closeLogin();
+				} else {
+					alert('Facebook login failed');
+				}
+			});
+	};
+})
+>>>>>>> origin/master
 
 
-.controller('DashCtrl', function($scope) {})
+// This is search
+.controller('DashCtrl', function($scope, UserLikes) {
 
+	$scope.likes = UserLikes;
+
+})
+
+// This is
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.

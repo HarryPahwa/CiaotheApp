@@ -1,5 +1,6 @@
 <ion-view view-title="Chats">
   <ion-content>
+<<<<<<< HEAD
     <ion-list>
       <div class="center" >
         <label class="item">
@@ -16,19 +17,21 @@
 
       <div class="container" ng-controller="HomeController">
         <p>Location:({{lat}}, {{lng}})</p></div>
+=======
 
+      <div class=" jumbotron center" >
+        <label class="item">
+          <button id="broadcastButton" class="button" ng-click="broadcastState=!broadcastState" ng-init="broadcastState=false">
+            Broadcast my location {{broadcastState}}
+          </button>
+        </label>
+      </div>
 
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.lastText}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-        
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
-      </ion-item>
-    </ion-list>
+      <div class="container" ng-controller="HomeController">
+        <p>Location:({{lat}}, {{lng}})</p>
+      </div>
+>>>>>>> origin/master
+
   </ion-content>
 </ion-view>
   
