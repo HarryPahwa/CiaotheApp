@@ -1,15 +1,17 @@
 <ion-view view-title="Chats">
   <ion-content>
     <ion-list>
-      <div class="jumbotron center">
+      <div class="center" >
               <label class="item">
-        <button class="button" ng-click="">
-        Broadcast my location
+        <button id="broadcastButton" class="button" ng-click="broadcastState=!broadcastState" ng-init="broadcastState=false">
+        Broadcast my location {{broadcastState}}
         </button>
       </label>
     </div>        
+      
 
-
+      <div class="container" ng-controller="HomeController">
+        <p>Location:({{lat}}, {{lng}})</p>
 
 
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
