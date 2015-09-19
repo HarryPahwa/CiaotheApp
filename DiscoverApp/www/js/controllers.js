@@ -1,52 +1,75 @@
 angular.module('starter.controllers', ['ngOpenFB'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB) {
-	$scope.fbLogin = function () {
-		FB.login(//{scope: 'email,user_likes,user_photos,user_videos', return_scopes: true}).then(//email,,read_stream,publish_actions
-			function (response) {
-				alert('Facebook login attempted');
-				if (response.status === 'connected') {
-					alert('Facebook login succeeded');
-					console.log(response.grantedScopes);
-					getUserInfo();
-				//	$scope.closeLogin();
-				} else {
-					alert('Facebook login failed');
-				}
-			}, {scope: 'email,user_likes,user_photos,user_videos', 
-			return_scopes: true});
+    watchLoginChange = function() {
 
+      var _self = this;
 
-		function getUserInfo(){
-			console.log("I'm here!");
-			ngFB.api('/me', function (response) {
-                console.log('Facebook Login RESPONSE: ' + angular.toJson(response));
-                // get profile picture
-                ngFB.api('/me/picture?type=normal', function (picResponse) {
-                    console.log('Facebook Login RESPONSE: ' + picResponse.data.url);
-                    response.imageUrl = picResponse.data.url;
-                    // store data to DB - Call to API
-                    // Todo
-                    // After posting user data to server successfully store user data locally
-                    var user = {};
-                    user.name = response.name;
-                    alert(response.name);
-                    user.email = response.email;
-                    if(response.gender) {
-                        response.gender.toString().toLowerCase() === 'male' ? user.gender = 'M' : user.gender = 'F';
-                    } else {
-                        user.gender = '';
-                    }
-                    user.profilePic = picResponse.data.url;
-                    $cookieStore.put('userInfo', user);
-                    $state.go('dashboard');
+      var oauthApp = angular.module('oauthApp.controllers', []);
+      oauthApp.controller('welcomeCtrl', function ($scope, $state, $cookieStore) {
  
+        /**
+         * SOCIAL LOGIN
+         * Facebook and Google
+         */
+        // FB Login
+        $scope.fbLogin = function () {
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    getUserInfo();
+                } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                }
+            }, {scope: 'email,user_photos,user_videos'});
+     
+            function getUserInfo() {
+                // get basic info
+                FB.api('/me', function (response) {
+                    console.log('Facebook Login RESPONSE: ' + angular.toJson(response));
+                    // get profile picture
+                    FB.api('/me/picture?type=normal', function (picResponse) {
+                        console.log('Facebook Login RESPONSE: ' + picResponse.data.url);
+                        response.imageUrl = picResponse.data.url;
+                        // store data to DB - Call to API
+                        // Todo
+                        // After posting user data to server successfully store user data locally
+                        var user = {};
+                        user.name = response.name;
+                        user.email = response.email;
+                        if(response.gender) {
+                            response.gender.toString().toLowerCase() === 'male' ? user.gender = 'M' : user.gender = 'F';
+                        } else {
+                            user.gender = '';
+                        }
+                        user.profilePic = picResponse.data.url;
+                        $cookieStore.put('userInfo', user);
+                        $state.go('dashboard');
+     
+                    });
                 });
-		}
-		);
-};
-	};
-})
+            }
+        };
+        // END FB Login
+      })
+    /*	$scope.fbLogin = function () {
+    		ngFB.login({scope: 'email,user_likes,user_photos,user_videos', return_scopes: true}).then(//email,,read_stream,publish_actions
+    			function (response) {
+    				alert('Facebook login attempted');
+    				if (response.status === 'connected') {
+    					alert('Facebook login succeeded');
+    					console.log(response.grantedScopes);
+    					//getUserInfo();
+    				//	$scope.closeLogin();
+    				} else {
+    					alert('Facebook login failed');
+    				}
+    			});
+
+    */
+
+    		
+    	};
+    })
 
 
 .controller('DashCtrl', function($scope) {})
@@ -64,6 +87,19 @@ angular.module('starter.controllers', ['ngOpenFB'])
   $scope.remove = function(chat) {
 	Chats.remove(chat);
   };
+})
+
+.controller('ProfileCtrl', function ($scope, ngFB) {
+    ngFB.api({
+        path: '/me',
+        params: {fields: 'id,name'}
+    }).then(
+        function (user) {
+            $scope.user = user;
+        },
+        function (error) {
+            alert('Facebook error: ' + error.error_description);
+        });
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
@@ -86,7 +122,19 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
-	enableFriends: true
+	   enableFriends: true
   };
+})
+
+.controller('dashboardCtrl', function ($scope, $window, $state, $cookieStore) {
+    // Set user details
+    $scope.user = $cookieStore.get('userInfo');
+    
+    // Logout user
+    $scope.logout = function () {
+        $cookieStore.remove("userInfo");
+        $state.go('welcome');
+        $window.location.reload();
+    }
 });
 
