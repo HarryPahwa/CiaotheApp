@@ -1,28 +1,19 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow, Arjun. Take care of them you lazy buffoon
-        </div>
-      </div>
-    </div>
+         
+    <ion-list>   
+
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="like in likes" type="item-text-wrap" >
+        <!-- <img ng-src="{{chat.face}}"> -->
+        <h2>{{like.id}} - (num)</h2>
+        <!-- <p>{{like.lastText}}</p> -->
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        
+        <ion-option-button class="button-assertive" ng-click="remove(like)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+
   </ion-content>
 </ion-view>
