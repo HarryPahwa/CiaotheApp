@@ -1,1 +1,10 @@
 /* Empty. Add your own CSS if you like */
+harryButton{
+	border-radius: 5px;
+	border: 2px solid #6495ED;
+	background-color: #BCD2EE;
+	height: 50px;
+	width: 120px;
+	margin: auto;
+	text-align: center;
+}
