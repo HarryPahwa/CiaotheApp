@@ -2,15 +2,49 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB) {
 	$scope.fbLogin = function () {
-		ngFB.login({scope: 'user_likes'}).then(//email,,read_stream,publish_actions
+		FB.login(//{scope: 'email,user_likes,user_photos,user_videos', return_scopes: true}).then(//email,,read_stream,publish_actions
 			function (response) {
+				alert('Facebook login attempted');
 				if (response.status === 'connected') {
-					console.log('Facebook login succeeded');
-					$scope.closeLogin();
+					alert('Facebook login succeeded');
+					console.log(response.grantedScopes);
+					getUserInfo();
+				//	$scope.closeLogin();
 				} else {
 					alert('Facebook login failed');
 				}
-			});
+			}, {scope: 'email,user_likes,user_photos,user_videos', 
+			return_scopes: true});
+
+
+		function getUserInfo(){
+			console.log("I'm here!");
+			ngFB.api('/me', function (response) {
+                console.log('Facebook Login RESPONSE: ' + angular.toJson(response));
+                // get profile picture
+                ngFB.api('/me/picture?type=normal', function (picResponse) {
+                    console.log('Facebook Login RESPONSE: ' + picResponse.data.url);
+                    response.imageUrl = picResponse.data.url;
+                    // store data to DB - Call to API
+                    // Todo
+                    // After posting user data to server successfully store user data locally
+                    var user = {};
+                    user.name = response.name;
+                    alert(response.name);
+                    user.email = response.email;
+                    if(response.gender) {
+                        response.gender.toString().toLowerCase() === 'male' ? user.gender = 'M' : user.gender = 'F';
+                    } else {
+                        user.gender = '';
+                    }
+                    user.profilePic = picResponse.data.url;
+                    $cookieStore.put('userInfo', user);
+                    $state.go('dashboard');
+ 
+                });
+		}
+		);
+};
 	};
 })
 
@@ -36,11 +70,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('ButtonColorChanger', function($scope, $stateParams){
-	$scope.broadcastState=!$scope.broadcastState;
-	
-	console.log($scope.broadcastState);
-})
+
 
 .controller('HomeController', function($scope, $window) {
 	$window.navigator.geolocation.getCurrentPosition(function(position){
