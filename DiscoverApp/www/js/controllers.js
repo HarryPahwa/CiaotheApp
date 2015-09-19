@@ -1,5 +1,20 @@
 angular.module('starter.controllers', ['ngOpenFB'])
 
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB) {
+	$scope.fbLogin = function () {
+		ngFB.login({scope: 'user_likes'}).then(//email,,read_stream,publish_actions
+			function (response) {
+				if (response.status === 'connected') {
+					console.log('Facebook login succeeded');
+					$scope.closeLogin();
+				} else {
+					alert('Facebook login failed');
+				}
+			});
+	};
+})
+
+
 .controller('DashCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -13,7 +28,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
-    Chats.remove(chat);
+	Chats.remove(chat);
   };
 })
 
@@ -23,6 +38,6 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
-    enableFriends: true
+	enableFriends: true
   };
 });
