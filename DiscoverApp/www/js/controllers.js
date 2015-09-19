@@ -74,6 +74,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 =======
 	$scope.fbLogin = function () {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		ngFB.login({scope: 'email,user_likes'}).then(//,read_stream,publish_actions
 			function (response) {
 				if (response.status === 'connected') {
@@ -81,11 +82,16 @@ angular.module('starter.controllers', ['ngOpenFB'])
 					// console.log(ngFB.login.email); 
 					//$scope.closeLogin();
 =======
+=======
+>>>>>>> parent of ad0b0ea... cotton candy can cut cats
 		ngFB.login({scope: 'user_likes'}).then(//email,,read_stream,publish_actions
 			function (response) {
 				if (response.status === 'connected') {
 					console.log('Facebook login succeeded');
 					$scope.closeLogin();
+<<<<<<< HEAD
+>>>>>>> parent of ad0b0ea... cotton candy can cut cats
+=======
 >>>>>>> parent of ad0b0ea... cotton candy can cut cats
 				} else {
 					alert('Facebook login failed');
