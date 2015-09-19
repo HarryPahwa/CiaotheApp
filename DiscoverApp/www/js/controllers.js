@@ -43,8 +43,27 @@ angular.module('starter.controllers', ['ngOpenFB'])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
+.controller('ButtonColorChanger', function($scope, $stateParams){
+	$scope.broadcastState=!$scope.broadcastState;
+	
+	console.log($scope.broadcastState);
+})
+
+.controller('HomeController', function($scope, $window) {
+	$window.navigator.geolocation.getCurrentPosition(function(position){
+		var lat=position.coords.latitude;
+		var lng=position.coords.longitude;
+
+		$scope.$apply(function() {
+			$scope.lat=lat;
+			$scope.lng=lng;
+		});
+	});
+})
+
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
 	enableFriends: true
   };
 });
+
