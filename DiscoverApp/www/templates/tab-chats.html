@@ -1,4 +1,4 @@
-<ion-view view-title="Chats">
+<ion-view view-title="Broadcast">
   <ion-nav-bar class="bar-positive">
 </ion-nav-bar>
   <ion-slide>
@@ -6,7 +6,9 @@
 
     <p  ng-controller="HomeController">
       <button id="broadcastButton" class="button button-balanced big-btn" ng-click="broadcastState=!broadcastState" ng-init="broadcastState=false" ng-hide="broadcastState">Broadcast my location</button>
-      <button id="stopBroadcastButton" class="button button-assertive big-btn" ng-click="broadcastState=!broadcastState" ng-hide="!broadcastState">Stop Broadcasting</button>
+      <button id="stopBroadcastButton" class="button button-assertive big-btn" ng-click="broadcastState=!broadcastState" ng-hide="!broadcastState">Stop Broadcasting my location</button>
+      <h4 align='center'>There is 1 user near you.</h5>
+      <h4 align='center'>You share 1 interest with users who are near you.</h5>
     </p>
 
 <!--

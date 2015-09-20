@@ -67,6 +67,19 @@ angular.module('starter.controllers', ['ngOpenFB'])
 	console.log($scope.broadcastState);
 })
 
+.controller('ProfileCtrl', function($scope) {
+      $scope.posts = [];
+
+      for(var i = 0; i < 7; i++) {
+        // Fake a date
+        var date = (+new Date) - (i * 1000 * 60 * 60);
+        $scope.posts.push({
+          created_at: date,
+          text: 'Doing a bit of ' + ((Math.floor(Math.random() * 2) === 1) ? 'that' : 'this')
+        });
+      }
+   })
+
 .controller('HomeController', function($scope, $window) {
 	$window.navigator.geolocation.getCurrentPosition(function(position){
 		var lat=position.coords.latitude;

@@ -18,19 +18,39 @@
 			</label>
 		</div>	
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
 		<div class="list card" ng-if="user.name">
 			<img ng-src="http://graph.facebook.com/{{user.id}}/picture">
 			<h2>{{user.name}}</h2>
-			<!-- <p>{{chat.lastText}}</p> -->
+			
 		</div>
 
 		<ion-list>   
 			<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="like in user.likes.data" type="item-text-wrap">
 				<h2>{{like.name}}</h2>
-				<!-- <i class="icon ion-chevron-right icon-accessory"></i>  href='#/tab/dash/{"index": {{$index}}, "name": "{{like.id}}"}'-->
-
+				
 			</ion-item>
 		</ion-list>
+	
 	</ion-content>
 	
 </ion-view>
