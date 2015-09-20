@@ -42,15 +42,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 .controller('UserDetailCtrl', function($scope, $stateParams, Users) {
 	$scope.users = Users;
 	$scope.userNm = JSON.parse($stateParams.userId).name; 
-	$scope.userId = JSON.parse($stateParams.userId).index; 
-
-	// $scope.getUsers = function(likeObj) {
-	// 	if ($scope.likeNm == likeObj.id) {
-	// 		return Object.keys(likeObj.users);
-	// 	} else {
-	// 		return null;
-	// 	}
-	// }
+	$scope.userId = JSON.parse($stateParams.userId).index;
 })
 
 // This is
@@ -59,9 +51,6 @@ angular.module('starter.controllers', ['ngOpenFB'])
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
   // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
