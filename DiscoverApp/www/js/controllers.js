@@ -8,8 +8,10 @@ angular.module('starter.controllers', ['ngOpenFB'])
 					console.log('Facebook login succeeded');
 					// console.log(ngFB.login.email); 
 					//$scope.closeLogin();
+					location.reload();
 				} else {
-					alert('Facebook login failed');
+					// alert('Facebook login failed');
+					console.log("Facebook not login");
 				}
 			});
 	};
@@ -89,14 +91,15 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 	ngFB.api({
 		path: '/me',
-		params: {fields: 'id,name'}
+		params: {fields: 'id,name,email'}
 	}).then(
 		function (user) {
 			$scope.user = user;
+			console.log(user); 
+			console.log($scope.user); 
 		},
 		function (error) {
 			alert('Facebook error: ' + error.error_description);
 	});
-
 });
 
