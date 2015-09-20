@@ -31,15 +31,6 @@ angular.module('starter.controllers', ['ngOpenFB'])
 	$scope.likes = UserLikes;
 	$scope.likeNm = JSON.parse($stateParams.likeId).name; 
 	$scope.likeId = JSON.parse($stateParams.likeId).index; 
-
-	$scope.getUsers = function(likeObj) {
-		if ($scope.likeNm == likeObj.id) {
-			return Object.keys(likeObj.users);
-		} else {
-			return null;
-		}
-	}
-
 })
 .controller('UserDetailCtrl', function($scope, $stateParams, Users) {
 	$scope.users = Users;

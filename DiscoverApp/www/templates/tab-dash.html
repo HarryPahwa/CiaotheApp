@@ -5,7 +5,7 @@
          
     <ion-list class="padding">   
 
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="like in likes" type="item-text-wrap" href='#/tab/dash/{"index": {{$index}}, "name": "{{like.id}}"}'>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="like in likes" type="item-text-wrap" href='#/tab/dash/{"index":{{$index}}, "name": "{{like.$id}}"}'>
         <h2>{{like.$id}} ({{countMembers(like.users)}})</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
         

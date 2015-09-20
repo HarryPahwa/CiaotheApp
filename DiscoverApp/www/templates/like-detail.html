@@ -11,9 +11,9 @@
 
 	<ion-list>
 		<div ng-repeat="like in likes">
-			<div ng-if="like.id == likeNm">
-				<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="user in like.users" type="item-text-wrap" href='#/tab/dash/user/{"index": {{$index}}, "name": "{{user.name}}"}'>
-						{{user.name}}
+			<div ng-if="like.$id == likeNm">
+				<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="(userKey, user) in like.users" type="item-text-wrap" href='#/tab/dash/user/{"index": {{$index}}, "name": "{{userKey}}"}'>
+						{{userKey}}<br/>
 				        <i class="icon ion-chevron-right icon-accessory"></i>
 				</ion-item>
 			</div>
