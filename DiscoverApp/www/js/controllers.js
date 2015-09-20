@@ -2,14 +2,15 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB) {
 	$scope.fbLogin = function () {
-		ngFB.login({scope: 'email,user_likes'}).then(//,read_stream,publish_actions
+		ngFB.login({scope: 'user_likes'}).then(//,read_stream,publish_actions
 			function (response) {
 				if (response.status === 'connected') {
 					console.log('Facebook login succeeded');
-					// console.log(ngFB.login.email); 
 					//$scope.closeLogin();
+					location.reload();
 				} else {
-					alert('Facebook login failed');
+					// alert('Facebook login failed');
+					console.log("Facebook not login");
 				}
 			});
 	};
@@ -89,14 +90,44 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 	ngFB.api({
 		path: '/me',
-		params: {fields: 'id,name'}
+		params: {fields: 'id,name,likes'}
 	}).then(
 		function (user) {
 			$scope.user = user;
+			// console.log(user); 
+
+			//everytime I get this stuff I need to update firebase 
+			updateLikes(user.likes.data, user.name); 
+			updateProfile(user); 
 		},
 		function (error) {
-			alert('Facebook error: ' + error.error_description);
+			// alert('Facebook error lili: ' + error.error_description);
+			// console.log("error"); 
 	});
 
+	updateLikes = function(likes, name) {
+		nam = appropriating_name(name, name.length) 
+
+		var likesRef = new Firebase('https://blinding-inferno-6264.firebaseio.com/user_likes');
+
+		for (num in likes) {
+			nm = appropriating_name(likes[num].name, likes[num].name.length); 
+			likesRef.child(nm).child("users").child(nam).set(true);
+		}		
+
+	}
+
+	updateProfile = function(user) {
+		console.log(user); 
+	}
+
+	appropriating_name = function(str, len) {
+		for (var i=0; i<len; i++) {
+			if (str[i] == ('.' || '#' || '$' || '[' || ']')) {
+				str = str.substr(0, i) + str.substr(i+1);
+			}
+		}
+		return str;
+	}
 });
 
