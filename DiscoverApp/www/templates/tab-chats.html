@@ -1,18 +1,28 @@
 <ion-view view-title="Chats">
-  <ion-content>
+  <ion-nav-bar class="bar-positive">
+</ion-nav-bar>
+  <ion-slide>
+    <ion-content padding="true">
 
-      <div class=" jumbotron center" >
-        <label class="item">
-          <button id="broadcastButton" class="button" ng-click="broadcastState=!broadcastState" ng-init="broadcastState=false">
-            Broadcast my location {{broadcastState}}
-          </button>
-        </label>
-      </div>
+    <p>
+      <button id="broadcastbutton" class="button button-balanced big-btn" ng-click="ButtonController" ng-init="broadcastState=false">Broadcast my location</button>
+      
+    </p>
 
-      <div class="container" ng-controller="HomeController">
-        <p>Location:({{lat}}, {{lng}})</p>
-      </div>
+<!--
+        <div class=" jumbotron center" >
+          <label class="item">
+            <button id="broadcastButton" class="button" ng-click="broadcastState=!broadcastState" ng-init="broadcastState=false">
+              Broadcast my location {{broadcastState}}
+            </button>
+          </label>
+        </div>
+-->
+        <div class="container" ng-controller="HomeController">
+          <p>Location:({{lat}}, {{lng}})</p>
+        </div>
 
-  </ion-content>
+    </ion-content>
+</ion-slide>
 </ion-view>
   
