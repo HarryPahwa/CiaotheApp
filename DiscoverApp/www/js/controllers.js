@@ -26,6 +26,20 @@ angular.module('starter.controllers', ['ngOpenFB'])
 	}
 
 })
+.controller('LikeDetailCtrl', function($scope, $stateParams, UserLikes) {
+	$scope.likes = UserLikes;
+	$scope.likeNm = JSON.parse($stateParams.likeId).name; 
+	$scope.likeId = JSON.parse($stateParams.likeId).index; 
+
+	$scope.getUsers = function(likeObj) {
+		if ($scope.likeNm == likeObj.id) {
+			return Object.keys(likeObj.users);
+		} else {
+			return null;
+		}
+	}
+
+})
 .controller('UserDetailCtrl', function($scope, $stateParams, Users) {
 	$scope.users = Users;
 	$scope.userNm = JSON.parse($stateParams.userId).name; 
@@ -47,6 +61,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
+  console.log($scope.chat); 
 })
 
 .controller('ButtonColorChanger', function($scope, $stateParams){
