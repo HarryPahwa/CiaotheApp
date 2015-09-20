@@ -1,18 +1,24 @@
 angular.module('starter.controllers', ['ngOpenFB'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB, $window) {
 	$scope.fbLogin = function () {
+		console.log("hey2"); 	
 		ngFB.login({scope: 'user_likes'}).then(//,read_stream,publish_actions
 			function (response) {
+				console.log("hey3"); 	
 				if (response.status === 'connected') {
 					console.log('Facebook login succeeded');
+					$window.location.reload(true);
 					//$scope.closeLogin();
-					location.reload();
-				} else {
+ 				} else {
 					// alert('Facebook login failed');
 					console.log("Facebook not login");
 				}
+			}, 
+			function (reason) {
+				console.log(reason); 
 			});
+
 	};
 })
 
@@ -80,6 +86,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 })
 
 .controller('AccountCtrl', function($scope, ngFB, $window) {
+	console.log("hey"); 
 	$scope.settings = {
 		enableFriends: true
 	};
