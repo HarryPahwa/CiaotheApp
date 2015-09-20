@@ -26,6 +26,11 @@ angular.module('starter.controllers', ['ngOpenFB'])
 		return Object.keys(likesObj).length; 
 	}
 
+	$scope.remove = function(index) {
+	alert(index);
+	$scope.likes[index].delete();
+	
+  };
 })
 .controller('LikeDetailCtrl', function($scope, $stateParams, UserLikes) {
 	$scope.likes = UserLikes;
@@ -65,7 +70,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
   console.log($scope.chat); 
 })
 
-.controller('ButtonColorChanger', function($scope, $stateParams){
+.controller('ButtonController', function($scope, $stateParams){
 	$scope.broadcastState=!$scope.broadcastState;
 	console.log("HERE");
 	console.log($scope.broadcastState);
@@ -90,7 +95,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 	ngFB.api({
 		path: '/me',
-		params: {fields: 'id,name,likes,email,gender'}
+		params: {fields: 'id,name,likes'}
 	}).then(
 		function (user) {
 			$scope.user = user;
@@ -118,17 +123,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 	}
 
 	updateProfile = function(user) {
-		name = appropriating_name(user.name, user.name.length); 
-
-		var usersRef = new Firebase('https://blinding-inferno-6264.firebaseio.com/Users');
-
-		usersRef.child(name).set({"email": user.email, "gender": user.gender}); 
-		for (num in user.likes.data) {
-			nm = appropriating_name(user.likes.data[num].name, user.likes.data[num].name.length); 
-			usersRef.child(name).child("likes").child(nm).set(true); 
-		}
-
-
+		console.log(user); 
 	}
 
 	appropriating_name = function(str, len) {
