@@ -25,9 +25,6 @@ angular.module('starter.controllers', ['ngOpenFB'])
 		return Object.keys(likesObj).length; 
 	}
 
-	console.log($scope.likes); 
-	console.log(UserLikes); 
-
 })
 .controller('UserDetailCtrl', function($scope, $stateParams, Users) {
 	$scope.users = Users;
@@ -70,9 +67,21 @@ angular.module('starter.controllers', ['ngOpenFB'])
 	});
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-	enableFriends: true
-  };
+.controller('AccountCtrl', function($scope, ngFB) {
+	$scope.settings = {
+		enableFriends: true
+	};
+
+	ngFB.api({
+		path: '/me',
+		params: {fields: 'id,name'}
+	}).then(
+		function (user) {
+			$scope.user = user;
+		},
+		function (error) {
+			alert('Facebook error: ' + error.error_description);
+	});
+
 });
 
