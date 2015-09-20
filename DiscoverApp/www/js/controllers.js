@@ -25,22 +25,24 @@ angular.module('starter.controllers', ['ngOpenFB'])
 		return Object.keys(likesObj).length; 
 	}
 
-	console.log($scope.likes); 
-	console.log(UserLikes); 
+})
+.controller('LikeDetailCtrl', function($scope, $stateParams, UserLikes) {
+	$scope.likes = UserLikes;
+	$scope.likeNm = JSON.parse($stateParams.likeId).name; 
+	$scope.likeId = JSON.parse($stateParams.likeId).index; 
 
+	$scope.getUsers = function(likeObj) {
+		if ($scope.likeNm == likeObj.id) {
+			return Object.keys(likeObj.users);
+		} else {
+			return null;
+		}
+	}
 })
 .controller('UserDetailCtrl', function($scope, $stateParams, Users) {
 	$scope.users = Users;
 	$scope.userNm = JSON.parse($stateParams.userId).name; 
-	$scope.userId = JSON.parse($stateParams.userId).index; 
-
-	// $scope.getUsers = function(likeObj) {
-	// 	if ($scope.likeNm == likeObj.id) {
-	// 		return Object.keys(likeObj.users);
-	// 	} else {
-	// 		return null;
-	// 	}
-	// }
+	$scope.userId = JSON.parse($stateParams.userId).index;
 })
 
 // This is
@@ -49,9 +51,6 @@ angular.module('starter.controllers', ['ngOpenFB'])
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
   // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
@@ -61,6 +60,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
+  console.log($scope.chat); 
 })
 
 .controller('ButtonColorChanger', function($scope, $stateParams){

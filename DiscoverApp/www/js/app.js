@@ -55,7 +55,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-
   .state('tab.dash-detail', {
     url: '/dash/:likeId',
     views: {
