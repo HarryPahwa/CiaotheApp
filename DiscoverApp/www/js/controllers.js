@@ -65,7 +65,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
   console.log($scope.chat); 
 })
 
-.controller('ButtonController', function($scope, $stateParams){
+.controller('ButtonColorChanger', function($scope, $stateParams){
 	$scope.broadcastState=!$scope.broadcastState;
 	
 	console.log($scope.broadcastState);
@@ -120,7 +120,13 @@ angular.module('starter.controllers', ['ngOpenFB'])
 	updateProfile = function(user) {
 		name = appropriating_name(user.name, user.name.length); 
 
-		var likesRef = new Firebase('https://blinding-inferno-6264.firebaseio.com/Users');
+		var usersRef = new Firebase('https://blinding-inferno-6264.firebaseio.com/Users');
+
+		usersRef.child(name).set({"email": user.email, "gender": user.gender}); 
+		for (num in user.likes.data) {
+			nm = appropriating_name(user.likes.data[num].name, user.likes.data[num].name.length); 
+			usersRef.child(name).child("likes").child(nm).set(true); 
+		}
 
 
 	}
