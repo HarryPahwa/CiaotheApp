@@ -92,14 +92,14 @@ angular.module('starter.controllers', ['ngOpenFB'])
 	});
 })
 
-.controller('AccountCtrl', function($scope, ngFB, $window) {
+.controller('AccountCtrl', function($scope, ngFB) {
 	$scope.settings = {
 		enableFriends: true
 	};
 
 	ngFB.api({
 		path: '/me',
-		params: {fields: 'id,name,likes,email,gender'}
+		params: {fields: 'id,name,likes'}
 	}).then(
 		function (user) {
 			$scope.user = user;
@@ -107,13 +107,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 			//everytime I get this stuff I need to update firebase 
 			updateLikes(user.likes.data, user.name); 
-
-			$window.navigator.geolocation.getCurrentPosition(function(position){
-				var lat=position.coords.latitude;
-				var lng=position.coords.longitude;
-
-				updateProfile(user, lat, lng); 
-			});
+			updateProfile(user); 
 		},
 		function (error) {
 			// alert('Facebook error lili: ' + error.error_description);
@@ -129,22 +123,12 @@ angular.module('starter.controllers', ['ngOpenFB'])
 			nm = appropriating_name(likes[num].name, likes[num].name.length); 
 			likesRef.child(nm).child("users").child(nam).set(true);
 		}		
+
 	}
 
-	updateProfile = function(user, lat, lng) {
+	updateProfile = function(user) {
 		console.log(user); 
-		
-		name = appropriating_name(user.name, user.name.length); 
-
-		var usersRef = new Firebase('https://blinding-inferno-6264.firebaseio.com/Users');
-		usersRef.child(name).set({"email": user.email, "gender": user.gender, "lat": lat, "lng": lng}); 
-
-		for (num in user.likes.data) {
-			nm = appropriating_name(user.likes.data[num].name, user.likes.data[num].name.length); 
-			usersRef.child(name).child("likes").child(nm).set(true); 
-		}
-	}	
-
+	}
 
 	appropriating_name = function(str, len) {
 		for (var i=0; i<len; i++) {
