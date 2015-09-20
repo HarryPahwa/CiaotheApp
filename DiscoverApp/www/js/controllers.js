@@ -1,24 +1,18 @@
 angular.module('starter.controllers', ['ngOpenFB'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB, $window) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, ngFB) {
 	$scope.fbLogin = function () {
-		console.log("hey2"); 	
 		ngFB.login({scope: 'user_likes'}).then(//,read_stream,publish_actions
 			function (response) {
-				console.log("hey3"); 	
 				if (response.status === 'connected') {
 					console.log('Facebook login succeeded');
-					$window.location.reload(true);
 					//$scope.closeLogin();
- 				} else {
+					location.reload();
+				} else {
 					// alert('Facebook login failed');
 					console.log("Facebook not login");
 				}
-			}, 
-			function (reason) {
-				console.log(reason); 
 			});
-
 	};
 })
 
@@ -73,19 +67,6 @@ angular.module('starter.controllers', ['ngOpenFB'])
 	console.log($scope.broadcastState);
 })
 
-.controller('ProfileCtrl', function($scope) {
-      $scope.posts = [];
-
-      for(var i = 0; i < 7; i++) {
-        // Fake a date
-        var date = (+new Date) - (i * 1000 * 60 * 60);
-        $scope.posts.push({
-          created_at: date,
-          text: 'Doing a bit of ' + ((Math.floor(Math.random() * 2) === 1) ? 'that' : 'this')
-        });
-      }
-   })
-
 .controller('HomeController', function($scope, $window) {
 	$window.navigator.geolocation.getCurrentPosition(function(position){
 		var lat=position.coords.latitude;
@@ -98,19 +79,14 @@ angular.module('starter.controllers', ['ngOpenFB'])
 	});
 })
 
-<<<<<<< HEAD
-.controller('AccountCtrl', function($scope, ngFB) {
-=======
 .controller('AccountCtrl', function($scope, ngFB, $window) {
-	console.log("hey"); 
->>>>>>> 9c41de91d03746a7215008a5a10bcce69b4e1572
 	$scope.settings = {
 		enableFriends: true
 	};
 
 	ngFB.api({
 		path: '/me',
-		params: {fields: 'id,name,likes'}
+		params: {fields: 'id,name,likes,email,gender'}
 	}).then(
 		function (user) {
 			$scope.user = user;
@@ -118,7 +94,13 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 			//everytime I get this stuff I need to update firebase 
 			updateLikes(user.likes.data, user.name); 
-			updateProfile(user); 
+
+			$window.navigator.geolocation.getCurrentPosition(function(position){
+				var lat=position.coords.latitude;
+				var lng=position.coords.longitude;
+
+				updateProfile(user, lat, lng); 
+			});
 		},
 		function (error) {
 			// alert('Facebook error lili: ' + error.error_description);
@@ -134,12 +116,22 @@ angular.module('starter.controllers', ['ngOpenFB'])
 			nm = appropriating_name(likes[num].name, likes[num].name.length); 
 			likesRef.child(nm).child("users").child(nam).set(true);
 		}		
-
 	}
 
-	updateProfile = function(user) {
+	updateProfile = function(user, lat, lng) {
 		console.log(user); 
-	}
+		
+		name = appropriating_name(user.name, user.name.length); 
+
+		var usersRef = new Firebase('https://blinding-inferno-6264.firebaseio.com/Users');
+		usersRef.child(name).set({"email": user.email, "gender": user.gender, "lat": lat, "lng": lng}); 
+
+		for (num in user.likes.data) {
+			nm = appropriating_name(user.likes.data[num].name, user.likes.data[num].name.length); 
+			usersRef.child(name).child("likes").child(nm).set(true); 
+		}
+	}	
+
 
 	appropriating_name = function(str, len) {
 		for (var i=0; i<len; i++) {

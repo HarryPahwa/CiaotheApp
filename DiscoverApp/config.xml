@@ -9,13 +9,6 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
-  <access origin="*" launch-external="yes"/>
-  <access origin="http://*.google.com" />
-  <access origin="https://*.google.com" />
-  <access origin="http://*.facebook.com" />
-  <access origin="http://.facebook.com" />
-  <access origin="https://*.facebook.com" />
-  <allow-navigation href="http://*/*" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>

@@ -10,74 +10,110 @@
 			</ion-toggle>
 		</ion-list> -->
 
-		<div ng-hide="loginSuccessful" ng-init="loginSuccessful=false">
+		
+
+		
+		<div id="profile-info" ng-if="user.name">
+			<img id="profile-image" src="http://graph.facebook.com/{{user.id}}/picture">
+			<h3 id="profile-name">{{user.name}}</h3>
+			<span id="profile-description">
+				<br/>
+				<br/>
+				<br/>
+			</span>
+		</div>
+
+		<div ng-if="!user.name">
 			<label class="item">
-				<button class="button button-block button-positive" ng-click="fbLogin()" ng-hide="loginSuccessful=true">
+				<button class="button button-block button-positive" ng-click="fbLogin()">
 				Login with Facebook
 				</button>
 			</label>
-		</div>	
-
-ng-controller="ProfileCtrl"
-alert("logged");
-
-    <div class="bar bar-header bar-danger">
-      <button class="button button-icon"><i class="icon-person-add"></i></button>
-      <h1 class="title">Me</h1>
-      <button class="button button-icon"><i class="icon-gear-b"></i></button>
-    </div>
-    alert("stuck");
-    <ion-content has-header="true">
-      <div id="profile-bg">Interests</div>
-      <div id="content">
-        <div id="profile-info" ng-if="user.name">
-          <img id="profile-image" src="http://graph.facebook.com/{{user.id}}/picture">
-          <h3 id="profile-name">Max</h3>
-          <span id="profile-description">Welcome to Ciao!</span>
-        </div>
-        <ion-list>
-          <ion-item ng-repeat="like in user.likes.data">
-            <img class="post-profile-image" src="http://graph.facebook.com/{{user.id}}/picture">
-            {{like.name}}
-            
-          </ion-item>
-        </ion-list>
-      </div>
-    </ion-content>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--
-
-
-
-		<div class="list card" ng-if="user.name">
-			<img ng-src="http://graph.facebook.com/{{user.id}}/picture">
-			<h2>{{user.name}}</h2>
-			
 		</div>
+
+		<ion-list>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">University of Alberta</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">University of Alberta</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">University of Alberta</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">University of Alberta</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">University of Alberta</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">University of Alberta</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">University of Alberta</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">U of A Computer Engineering Club</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Tesher</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Engineering Students' Society of the University of Alberta</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Android</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Kanye West</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Mac Brock for President</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Android</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Basketball</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Campbell for Change</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">India Canada Association of Saskatchewan</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Campbell Collegiate Fine Arts</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Life In Panels</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">International Baccalaureate</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Campbell Collegiate Business Club</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">The International Baccalaureate</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Kevin Garnett</h2>
+			</ion-item>
+			<ion-item class="item-remove-animate item-avatar item-icon-right item" type="item-text-wrap">
+				<h2 class="ng-binding">Rajon Rondo</h2>
+			</ion-item>
+			
+		</ion-list>
 
 		<ion-list>   
 			<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="like in user.likes.data" type="item-text-wrap">
 				<h2>{{like.name}}</h2>
-				
+				<!-- <i class="icon ion-chevron-right icon-accessory"></i>  href='#/tab/dash/{"index": {{$index}}, "name": "{{like.id}}"}'-->
+
 			</ion-item>
 		</ion-list>
-	-->
 	</ion-content>
 	
-</ion-view
->
+</ion-view>
