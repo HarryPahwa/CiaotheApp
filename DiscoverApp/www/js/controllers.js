@@ -67,7 +67,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 .controller('ButtonColorChanger', function($scope, $stateParams){
 	$scope.broadcastState=!$scope.broadcastState;
-	
+	console.log("HERE");
 	console.log($scope.broadcastState);
 })
 
