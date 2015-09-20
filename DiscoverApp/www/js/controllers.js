@@ -90,7 +90,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
 	ngFB.api({
 		path: '/me',
-		params: {fields: 'id,name,likes'}
+		params: {fields: 'id,name,likes,email,gender'}
 	}).then(
 		function (user) {
 			$scope.user = user;
@@ -118,7 +118,11 @@ angular.module('starter.controllers', ['ngOpenFB'])
 	}
 
 	updateProfile = function(user) {
-		console.log(user); 
+		name = appropriating_name(user.name, user.name.length); 
+
+		var likesRef = new Firebase('https://blinding-inferno-6264.firebaseio.com/Users');
+
+
 	}
 
 	appropriating_name = function(str, len) {
