@@ -39,6 +39,19 @@ angular.module('starter.controllers', ['ngOpenFB'])
 		}
 	}
 })
+.controller('UserDetailCtrl', function($scope, $stateParams, Users) {
+	$scope.users = Users;
+	$scope.userNm = JSON.parse($stateParams.userId).name; 
+	$scope.userId = JSON.parse($stateParams.userId).index; 
+
+	// $scope.getUsers = function(likeObj) {
+	// 	if ($scope.likeNm == likeObj.id) {
+	// 		return Object.keys(likeObj.users);
+	// 	} else {
+	// 		return null;
+	// 	}
+	// }
+})
 
 // This is
 .controller('ChatsCtrl', function($scope, Chats) {
