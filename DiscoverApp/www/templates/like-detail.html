@@ -1,0 +1,42 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+
+
+<ion-view view-title="{{likeNm}}">
+  <ion-content class="padding">
+
+	<ion-list>
+		<div ng-repeat="like in likes">
+			<div ng-if="like.id == likeNm">
+				<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="user in like.users" type="item-text-wrap">
+						{{user.name}}
+				</ion-item>
+			</div>
+
+			<!-- <span ng-switch="{{like.id}}">
+				<div ng-switch-when="{{likeNm}}">
+					<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="user in {{like.users}}" type="item-text-wrap">
+						{{user.name}}
+					</ion-item>
+				</div>
+				<div ng-switch-when="!{{likeNm}}">
+					poop
+				</div>
+			</span> -->
+		</div>
+		  <!-- <ion-item>
+		  	<span >
+
+				{{getUsers(like)}}
+		  		
+
+		  	</span>
+			</ion-item> -->
+	</ion-list>
+
+  </ion-content>
+</ion-view>
