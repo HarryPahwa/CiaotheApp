@@ -4,7 +4,7 @@
     <ion-list>   
 
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="like in likes" type="item-text-wrap" href='#/tab/dash/{"index": {{$index}}, "name": "{{like.id}}"}'>
-        <h2>{{like.id}} ({{countMembers(like.users)}})</h2>
+        <h2>{{like.$id}} ({{countMembers(like.users)}})</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
         
         <ion-option-button class="button-assertive" ng-click="remove(like)">
