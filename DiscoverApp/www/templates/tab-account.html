@@ -10,9 +10,9 @@
 			</ion-toggle>
 		</ion-list> -->
 
-		<div>
+		<div ng-hide="loginSuccessful" ng-init="loginSuccessful=false">
 			<label class="item">
-				<button class="button button-block button-positive" ng-click="fbLogin()">
+				<button class="button button-block button-positive" ng-click="fbLogin()" ng-hide="loginSuccessful=true">
 				Login with Facebook
 				</button>
 			</label>
