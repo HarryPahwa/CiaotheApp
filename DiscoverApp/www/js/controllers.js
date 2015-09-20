@@ -65,7 +65,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
   console.log($scope.chat); 
 })
 
-.controller('ButtonColorChanger', function($scope, $stateParams){
+.controller('ButtonController', function($scope, $stateParams){
 	$scope.broadcastState=!$scope.broadcastState;
 	
 	console.log($scope.broadcastState);
